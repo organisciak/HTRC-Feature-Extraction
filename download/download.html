@@ -21,11 +21,23 @@
     <script src="bower_components/highlightjs/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
   </head>
-  <body><div class="container">
-    <h1>Page-Level Features From the HTRC</h1>
-
-    <div class="row">
-	    <div class="col-md-12">Introduction. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum felis a sapien pellentesque, in imperdiet odio consequat. Quisque massa purus, gravida tempus pharetra at, auctor ultrices leo. Donec molestie fermentum velit sed eleifend. Integer ac malesuada sapien, ut eleifend dolor. Aliquam rutrum nunc felis, id sodales orci laoreet sit amet. Donec tempus, dolor eget mattis molestie, nisi sem sagittis tortor, a ornare diam urna eu ipsum. Proin pretium velit ligula, eu convallis sapien tincidunt vel.</div>
+  <body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+            </div>
+        </div>
+    </div>
+  <div class="container" style="padding-top:70px">
+  <div class="row">
+        <div class="col-md-12">
+        <!--START INTRO-->
+        
+        <h1>Page-Level Features From the HTRC</h1>
+    
+	    Introduction. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum felis a sapien pellentesque, in imperdiet odio consequat. Quisque massa purus, gravida tempus pharetra at, auctor ultrices leo. Donec molestie fermentum velit sed eleifend. Integer ac malesuada sapien, ut eleifend dolor. Aliquam rutrum nunc felis, id sodales orci laoreet sit amet. Donec tempus, dolor eget mattis molestie, nisi sem sagittis tortor, a ornare diam urna eu ipsum. Proin pretium velit ligula, eu convallis sapien tincidunt vel.
+        
+        </div> <!-- END intro col -->
     </div>
     <div class="row">
 	    <div class="col-md-6">
@@ -48,7 +60,7 @@
         "endLineChars": {}
       },
       "bodyStats": {
-        "tokenCount": 4,
+        <span class="blah">&nbsp;</span>"tokenCount": 4,
         "lineCount": 4,
         "emptyLineCount": 0,
         "sentenceCount": 1,
@@ -95,10 +107,29 @@
 	    </code></pre>
 	</div> <!-- End example JSON column -->
 	<div class="col-md-6">
-		<h2>Documentation</h2>
-		<p>Here we'll discuss the individual fields brefly, and what they mean.</p>
-		<p>Ideally, the field in this column could match the horizontal alignment of the matching on the right, sort of how <a href="http://backbonejs.org/docs/backbone.html">the Backbone documentation looks</a>.</p>
-		<p>e.g.<br/><strong>pageNumber</strong>: the number of the page within the volume [<strong>id</strong>].</p>
+    <!-- START DOCUMENTATION -->
+    
+    <h2 id="documentation">Documentation</h2>
+<h3 id="volume">Volume</h3>
+<p><strong>id</strong>: Each volume is represented as a JSON object, identified by a unique <em>id</em>[string], <em>pageCount</em>[integer], and <em>pages</em> [array of page objects].</p>
+<h3 id="page">Page</h3>
+<p>Pages are contained within volumes, they have a page number, and information on their header, body, and footer.</p>
+<h4 id="page-level-information">Page-level information:</h4>
+<p><strong>pageNumber</strong>:</p>
+<p><strong>lineCount</strong>:</p>
+<p><strong>emptyLineCount</strong>:</p>
+<p><strong>sentenceCount</strong>:</p>
+<h4 id="header-body-and-footer-information">Header, Body, and Footer information</h4>
+<p>The fields for <em>headerStats</em>, <em>bodyStats</em>, and <em>footerStats</em> are the same, but apply to different parts of the page.</p>
+<p><strong>tokenCount</strong>: The number of unique tokens in the section.</p>
+<p><strong>lineCount</strong>: The number of lines containing text in the section. This represents the layout of the page, for sentence counts, see the <em>sentenceCount</em> field.</p>
+<p><strong>emptyLineCount</strong>: The number of lines without text.</p>
+<p><strong>sentenceCount</strong>: Sentences found in the text, parsed by …...</p>
+<p><strong>tokens</strong>: A list of all tokens, counted by their part of speech usage. Details on POS parsing and types of tags used.</p>
+<p><strong>beginLineChars</strong>: Counts of all non-zero occurring characters at the start of lines. Why?</p>
+<p><strong>endLineChars</strong>: Counts of all non-zero occurring characters at the end of lines. Why?</p>
+
+    
 	</div> <!-- End short documentation -->
     </div> <!-- End row-->
     <hr />
@@ -124,9 +155,15 @@
     </div>
     <div class="row">
 	    <div class="col-md-12">
-		    <h2>Detailed Documentation</h2>
-		    <p>Here we can discuss the processes used to create the data.</p>
-	    </div>
+        <!-- START DOCUMENTATION/QUESTION -->
+        <h2 id="questions">Questions</h2>
+<p><strong>How are tokens parsed?</strong></p>
+<p><strong>Where’s the metadata? Who wrote the book, when is it from, etc.?</strong></p>
+<p>This download includes features extracted from the full-text pages of volumes in the HTRC collection. HTRC offers a metadata API where you can find more information about the volumes, using the volume <em>id</em> field. {LINK to details about API.}</p>
+<p><strong>What do I do with end of line characters?</strong></p>
+<p>[...]</p>
+
+	    </div> <!-- End documentation col-->
     </div> <!-- End documentation row-->
     <hr />
     <div class="row">
@@ -152,5 +189,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>$(span:contains("\"tokenCount\"")).css("text-size", 30)</script>
   </div></body>
 </html>
