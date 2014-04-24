@@ -33,9 +33,8 @@
         <div class="col-md-12">
         <!--START INTRO-->
         
-        <h1>Page-Level Features From the HTRC</h1>
-    
-	    Introduction. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum felis a sapien pellentesque, in imperdiet odio consequat. Quisque massa purus, gravida tempus pharetra at, auctor ultrices leo. Donec molestie fermentum velit sed eleifend. Integer ac malesuada sapien, ut eleifend dolor. Aliquam rutrum nunc felis, id sodales orci laoreet sit amet. Donec tempus, dolor eget mattis molestie, nisi sem sagittis tortor, a ornare diam urna eu ipsum. Proin pretium velit ligula, eu convallis sapien tincidunt vel.
+        <h1 id="page-level-features-from-the-htrc">Page-Level Features From the HTRC</h1>
+<p>Introduction. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum felis a sapien pellentesque, in imperdiet odio consequat….</p>
         
         </div> <!-- END intro col -->
     </div>
@@ -115,12 +114,12 @@
 <h3 id="page">Page</h3>
 <p>Pages are contained within volumes, they have a page number, and information on their header, body, and footer.</p>
 <h4 id="page-level-information">Page-level information:</h4>
-<p><strong>pageNumber</strong>:</p>
-<p><strong>lineCount</strong>:</p>
-<p><strong>emptyLineCount</strong>:</p>
-<p><strong>sentenceCount</strong>:</p>
+<p><strong>pageNumber</strong>: The page number. Numbers are always sequential from the start, so in theory, updates to the OCR that add or remove pages, the page number will change. With that caveat, the practical likelihood of changes is low, so this can cautiously be used as an id.</p>
+<p><strong>lineCount</strong>: Number of non-empty lines in the page.</p>
+<p><strong>emptyLineCount</strong>: Number of empty lines in the page.</p>
+<p><strong>sentenceCount</strong>: Number of sentences identified in the text. [link-to-faq Details on parsing].</p>
 <h4 id="header-body-and-footer-information">Header, Body, and Footer information</h4>
-<p>The fields for <em>headerStats</em>, <em>bodyStats</em>, and <em>footerStats</em> are the same, but apply to different parts of the page.</p>
+<p>The fields for <em>headerStats</em>, <em>bodyStats</em>, and <em>footerStats</em> are the same, but apply to different parts of the page. <!-- Explain how we differentiate between the three parts of a page --></p>
 <p><strong>tokenCount</strong>: The number of unique tokens in the section.</p>
 <p><strong>lineCount</strong>: The number of lines containing text in the section. This represents the layout of the page, for sentence counts, see the <em>sentenceCount</em> field.</p>
 <p><strong>emptyLineCount</strong>: The number of lines without text.</p>
@@ -156,7 +155,7 @@
     <div class="row">
 	    <div class="col-md-12">
         <!-- START DOCUMENTATION/QUESTION -->
-        <h2 id="questions">Questions</h2>
+<h2 id="questions">Questions</h2>
 <p><strong>How are tokens parsed?</strong></p>
 <p><strong>Where’s the metadata? Who wrote the book, when is it from, etc.?</strong></p>
 <p>This download includes features extracted from the full-text pages of volumes in the HTRC collection. HTRC offers a metadata API where you can find more information about the volumes, using the volume <em>id</em> field. {LINK to details about API.}</p>
