@@ -33,7 +33,7 @@
         <div class="col-md-12">
         <!--START INTRO-->
         
-        <h1 id="page-level-features-from-the-htrc">Page-Level Features From the HTRC</h1>
+<h1 id="page-level-features-from-the-htrc">Page-Level Features From the HTRC</h1>
 <p>Introduction. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum felis a sapien pellentesque, in imperdiet odio consequat….</p>
         
         </div> <!-- END intro col -->
@@ -109,24 +109,29 @@
     <!-- START DOCUMENTATION -->
     
     <h2 id="documentation">Documentation</h2>
+
 <h3 id="volume">Volume</h3>
-<p><strong>id</strong>: Each volume is represented as a JSON object, identified by a unique <em>id</em>[string], <em>pageCount</em>[integer], and <em>pages</em> [array of page objects].</p>
+<p>The volume represents the current work (e.g. book) as represented in the HathiTrust index.</p>
+<p><strong>id</strong>: A unique identifier for the current volume. This is the same identifier used in the HathiTrust and HathiTrust Research Center corpora.</p>
+<p><strong>pageCount</strong>: The number of pages in the volume.</p>
+<p><strong>pages</strong>: An array of JSON objects, each representing a page of the volume.</p>
 <h3 id="page">Page</h3>
-<p>Pages are contained within volumes, they have a page number, and information on their header, body, and footer.</p>
-<h4 id="page-level-information">Page-level information:</h4>
-<p><strong>pageNumber</strong>: The page number. Numbers are always sequential from the start, so in theory, updates to the OCR that add or remove pages, the page number will change. With that caveat, the practical likelihood of changes is low, so this can cautiously be used as an id.</p>
+<p>Pages are contained within volumes, they have a sequence number, and information about their header, body, and footer.</p>
+<h4 id="page-level-information">Page-level information</h4>
+<p><strong>seq</strong>: The sequence number. [link-to-faq See notes on ID usage.]</p>
 <p><strong>lineCount</strong>: Number of non-empty lines in the page.</p>
 <p><strong>emptyLineCount</strong>: Number of empty lines in the page.</p>
-<p><strong>sentenceCount</strong>: Number of sentences identified in the text. [link-to-faq Details on parsing].</p>
+<p><strong>sentenceCount</strong>: Number of sentences identified in the page using OpenNLP. [link-to-faq Details on parsing].</p>
 <h4 id="header-body-and-footer-information">Header, Body, and Footer information</h4>
-<p>The fields for <em>headerStats</em>, <em>bodyStats</em>, and <em>footerStats</em> are the same, but apply to different parts of the page. <!-- Explain how we differentiate between the three parts of a page --></p>
-<p><strong>tokenCount</strong>: The number of unique tokens in the section.</p>
-<p><strong>lineCount</strong>: The number of lines containing text in the section. This represents the layout of the page, for sentence counts, see the <em>sentenceCount</em> field.</p>
-<p><strong>emptyLineCount</strong>: The number of lines without text.</p>
-<p><strong>sentenceCount</strong>: Sentences found in the text, parsed by …...</p>
-<p><strong>tokens</strong>: A list of all tokens, counted by their part of speech usage. Details on POS parsing and types of tags used.</p>
-<p><strong>beginLineChars</strong>: Counts of all non-zero occurring characters at the start of lines. Why?</p>
-<p><strong>endLineChars</strong>: Counts of all non-zero occurring characters at the end of lines. Why?</p>
+<p>The fields for <em>headerStats</em>, <em>bodyStats</em>, and <em>footerStats</em> are the same, but apply to different parts of the page. [link-to-faq Read about the differences between the sections.]</p>
+<p><strong>tokenCount</strong>: The total number of tokens in this page section.</p>
+<p><strong>lineCount</strong>: The number of lines containing characters of any kind in this page section. This represents the layout of the page, for sentence counts, see the <em>sentenceCount</em> field.</p>
+<p><strong>emptyLineCount</strong>: The number of lines without text in this page section.</p>
+<p><strong>sentenceCount</strong>: The number of sentences found in the text in this page section, parsed using OpenNLP.</p>
+<p><strong>tokens</strong>: A list of all tokens in this page section characterized by part of speech using OpenNLP. Tokens are case-sensitive. Hyphenation of tokens at end of line were corrected. Words separated by a hypen across a line break are rejoined. No other data cleaning or OCR correction was performed. There will be separate counts, for instance, for “rose” (noun) and “rose” (verb). [link-to-faq Details on POS parsing and types of tags used.]</p>
+<p><strong>beginLineChars</strong>: Count of the initial character of each line in this page section (ignoring whitespace).</p>
+<p><strong>endLineChars</strong>: Count of the last character on each line in this page section (ignoring whitespace).</p>
+<p><strong>How are tokens parsed?</strong></p>
 
     
 	</div> <!-- End short documentation -->
@@ -157,10 +162,18 @@
         <!-- START DOCUMENTATION/QUESTION -->
 <h2 id="questions">Questions</h2>
 <p><strong>How are tokens parsed?</strong></p>
+<p>Hyphenation of tokens at end of line were corrected. Then OpenNLP was used to tokenize and perform part of speech (POS) tagging. No additional data cleaning or OCR correction was performed. Additional information on</p>
+<p><strong>Can I use the page sequence as an unique identifier?</strong></p>
+<p>The <em>seq</em> value is always sequential from the start. This means that the pages of a volume each have a unique sequence number, but this is specific to the current version of the full text. In theory, updates to the OCR that add or remove pages will change the sequence. The practical likelihood of sequential changes is low, but uses of the page as an id should be cautious.</p>
+<p>A future release of this data will include persistent page identifiers that remain unchanged when there are sequential changes.</p>
 <p><strong>Where’s the metadata? Who wrote the book, when is it from, etc.?</strong></p>
 <p>This download includes features extracted from the full-text pages of volumes in the HTRC collection. HTRC offers a metadata API where you can find more information about the volumes, using the volume <em>id</em> field. {LINK to details about API.}</p>
-<p><strong>What do I do with end of line characters?</strong></p>
-<p>[...]</p>
+<p>[If we can provide <em>some</em> kind of bulk metadata for each tar.gz of volumes, that would be great. Even like a .csv of author, title, date, language, etc. would be helpful. Otherwise people aren’t going to do anything with the data, realistically. If I have to hammer on an API to identify which volumes in a set are relevant to me, I’m usually going to put that off to another day. Ted]</p>
+<p><strong>What do I do with beginning- or end-of-line characters?</strong></p>
+<p>The characters at the start of a line can be used to differentiate text from paratext at a page level: for instance, index lines tend to begin with capitalized letters and an index page often includes repeated initial characters with a set of numbers at the end of lines.</p>
+<p>The characters at the end of a line can be used to differentiate text from paratext: lines in a table of contents, for instance, tend to end with a number.</p>
+<p><strong>What is the difference between the header, body, and footer sections?</strong></p>
+<p>Because repeated headers and footers can distort word counts in a document, but also help identify document parts, we attempt to identify repeated lines at the top or bottom of a page and provide separate token counts for those forms of paratext. The “header” and “footer” sections will also include tokens that are page numbers, catchwords, or other short lines at the very top or bottom of a page. Users can of course ignore these divisions by aggregating the token counts for header, body, and footer sections.</p>
 
 	    </div> <!-- End documentation col-->
     </div> <!-- End documentation row-->
