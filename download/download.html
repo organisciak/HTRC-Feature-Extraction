@@ -113,7 +113,7 @@
     <!-- START DOCUMENTATION -->
     
     
- <h2 id="documentation">Documentation</h2>
+<h2 id="documentation">Documentation</h2>
 <h3 id="volume">Volume</h3>
 <p>The volume represents the current work (e.g. book) as represented in the HathiTrust index.</p>
 <p><strong>id</strong>: A unique identifier for the current volume. This is the same identifier used in the HathiTrust and HathiTrust Research Center corpora.</p>
@@ -176,11 +176,19 @@
 <p>A future release of this data will include persistent page identifiers that remain unchanged when there are sequential changes.</p>
 <h3 id="metadata">Where’s the metadata? Who wrote the book, when is it from, etc.?</h3>
 <p>This download only includes <em>features extracted from the full-text pages of volumes</em> in the HTRC collection. For metadata information, such as details about the author, such as author, title, date, and subject classifications, HT and HTRC offer [a metadata API] where you can find more information about the volumes, using the volume <em>id</em> field.</p>
-<p>What do I do with beginning- or end-of-line characters? {#eol}</p>
+<h3 id="eol">What do I do with beginning- or end-of-line characters?</h3>
 <p>The characters at the start and end of a line can be used to differentiate text from <a href="http://en.wikipedia.org/wiki/Paratext">paratext</a> at a page level. For instance, index lines tend to begin with capitalized letters and end with numbers. Likewise, lines in a table of contents can be identified through arabic or roman numerals at the start of a line.</p>
 <h3 id="header-q">What is the difference between the header, body, and footer sections?</h3>
 <p>Because repeated headers and footers can distort word counts in a document, but also help identify document parts, we attempt to identify repeated lines at the top or bottom of a page and provide separate token counts for those forms of paratext. The “header” and “footer” sections will also include tokens that are page numbers, catchwords, or other short lines at the very top or bottom of a page. Users can of course ignore these divisions by aggregating the token counts for header, body, and footer sections.</p>
-<p>current implementation if a page has &lt; 3 lines, assume no HEADER or FOOTER for &gt;= 3 lines, assume that there might be a header and a footer… and in that case, the body would be all the lines except the first and last compute numCharsBody = max(numCharsPerLine) = max number of characters per line for the body where characters are non-whitespace and non-punctuation compute numCharsHeader and numCharsFooter as the number of characters where characters are non-whitespace and non-punctuation if the numCharsHeader &lt; numCharsBody * 0.5 then establish the header as the HEADER if numCharsFooter &lt; numCharsBody * 0.05, then establish the footer as the FOOTER</p>
+<p>The current implementation classifies the part of the page in the following way:</p>
+<ul>
+<li>if a page has &lt; 3 lines, assume no HEADER or FOOTER</li>
+<li>for &gt;= 3 lines, assume that there might be a header and a footer… and in that case, the body would be all the lines except the first and last</li>
+<li>compute numCharsBody = max(numCharsPerLine) = max number of characters per line for the body where characters are non-whitespace and non-punctuation</li>
+<li>compute numCharsHeader and numCharsFooter as the number of characters where characters are non-whitespace and non-punctuation</li>
+<li>if the numCharsHeader &lt; numCharsBody * 0.5 then establish the header as the HEADER</li>
+<li>if numCharsFooter &lt; numCharsBody * 0.05, then establish the footer as the FOOTER</li>
+</ul>
 
         
 
