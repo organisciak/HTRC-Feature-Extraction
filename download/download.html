@@ -34,13 +34,17 @@
         <!--START INTRO-->
         
 <h1 id="page-level-features-from-the-htrc">Page-Level Features From the HTRC</h1>
-<p>Introduction. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum felis a sapien pellentesque, in imperdiet odio consequat….</p>
+<p>We feel that a great deal of useful research can be done with pre-calculated features. We are providing all features in json format. The primary precalculated feature that we will be providing is the token (unigram) count, on a per-page basis. In other words, each page will be represented as a collection of pairs where a token is paired with its count on the page. In reality this becomes slightly more complicated because we are also performing part of speech (POS) tagging, and so it is really tokens-as-specific-POS that are being computed.</p>
+<p>There is a fair amount of consensus among users that it is important to provide token information at the page level — since it otherwise becomes impossible to separate text from paratext (e.g. thirty pages of publishers’ ads at the back of a book). We have decided to break each page into a collection of three parts: header, body, and footer.</p>
+<p>We use an open-source tool (OpenNLP) for tokenizing text and for tagging parts of speech. This will make it possible for users to reconstruct our process, so they can compare data from HathiTrust volumes to volumes they may have locally. We also rejoin words that are broken across a hyphen at the end of a line.</p>
+<p>As part of our page representation, we also include two special features: the number of lines on each page, and the number of lines with text. Finally, we will provide a per-page count of characters that start and end lines on each page (this is a case-sensitive list, created before rejoining words broken at a hyphen). This information can illuminate genre and volume structure: for instance, it helps distinguish poetry from prose, and the text from the body that forms an index.</p>
+<p>Review <a href="#sample">sample data</a> or jump straight to the <a href="#downloads">downloads</a>.</p>
         
         </div> <!-- END intro col -->
     </div>
     <div class="row">
 	    <div class="col-md-6">
-            <h2>Sample Code</h2>
+            <h2 id="sample">Sample Code</h2>
 	    <pre><code>
 
 {
@@ -108,8 +112,8 @@
 	<div class="col-md-6">
     <!-- START DOCUMENTATION -->
     
-    <h2 id="documentation">Documentation</h2>
-
+    
+ <h2 id="documentation">Documentation</h2>
 <h3 id="volume">Volume</h3>
 <p>The volume represents the current work (e.g. book) as represented in the HathiTrust index.</p>
 <p><strong>id</strong>: A unique identifier for the current volume. This is the same identifier used in the HathiTrust and HathiTrust Research Center corpora.</p>
@@ -118,20 +122,20 @@
 <h3 id="page">Page</h3>
 <p>Pages are contained within volumes, they have a sequence number, and information about their header, body, and footer.</p>
 <h4 id="page-level-information">Page-level information</h4>
-<p><strong>seq</strong>: The sequence number. [link-to-faq See notes on ID usage.]</p>
+<p><strong>seq</strong>: The sequence number. <a href="#page-id">See notes on ID usage</a>.</p>
 <p><strong>lineCount</strong>: Number of non-empty lines in the page.</p>
 <p><strong>emptyLineCount</strong>: Number of empty lines in the page.</p>
-<p><strong>sentenceCount</strong>: Number of sentences identified in the page using OpenNLP. [link-to-faq Details on parsing].</p>
+<p><strong>sentenceCount</strong>: Number of sentences identified in the page using OpenNLP. <a href="#sentence-parse">Details on parsing</a>.</p>
 <h4 id="header-body-and-footer-information">Header, Body, and Footer information</h4>
-<p>The fields for <em>headerStats</em>, <em>bodyStats</em>, and <em>footerStats</em> are the same, but apply to different parts of the page. [link-to-faq Read about the differences between the sections.]</p>
+<p>The fields for <em>headerStats</em>, <em>bodyStats</em>, and <em>footerStats</em> are the same, but apply to different parts of the page. <a href="#header-q">Read about the differences between the sections</a>.</p>
 <p><strong>tokenCount</strong>: The total number of tokens in this page section.</p>
 <p><strong>lineCount</strong>: The number of lines containing characters of any kind in this page section. This represents the layout of the page, for sentence counts, see the <em>sentenceCount</em> field.</p>
 <p><strong>emptyLineCount</strong>: The number of lines without text in this page section.</p>
 <p><strong>sentenceCount</strong>: The number of sentences found in the text in this page section, parsed using OpenNLP.</p>
-<p><strong>tokens</strong>: A list of all tokens in this page section characterized by part of speech using OpenNLP. Tokens are case-sensitive. Hyphenation of tokens at end of line were corrected. Words separated by a hypen across a line break are rejoined. No other data cleaning or OCR correction was performed. There will be separate counts, for instance, for “rose” (noun) and “rose” (verb). [link-to-faq Details on POS parsing and types of tags used.]</p>
+<p><strong>tokens</strong>: A list of all tokens in this page section characterized by part of speech using OpenNLP. Tokens are case-sensitive. There will be separate counts, for instance, for “rose” (noun) and “rose” (verb), while a capitalized “Rose” is shown as a separate token. Words separated by a hyphen across a line break are rejoined. No other data cleaning or OCR correction was performed. <a href="#token-parse">Details on POS parsing and types of tags used</a>.</p>
 <p><strong>beginLineChars</strong>: Count of the initial character of each line in this page section (ignoring whitespace).</p>
 <p><strong>endLineChars</strong>: Count of the last character on each line in this page section (ignoring whitespace).</p>
-<p><strong>How are tokens parsed?</strong></p>
+
 
     
 	</div> <!-- End short documentation -->
@@ -139,7 +143,7 @@
     <hr />
     <div class="row">
 	    <div class="col-md-8">
-		    <h2>Download Links</h2>
+		    <h2 id="downloads">Download Links</h2>
 		    <p class="text-warning">By downloading the archives below, you agree to our <a>Terms of Use</a>.<strong>(placeholder)</strong></p>
 		    <p><a><span class="glyphicon glyphicon-compressed"></span> file.bz2</a>
 	    </div>
@@ -160,20 +164,25 @@
     <div class="row">
 	    <div class="col-md-12">
         <!-- START DOCUMENTATION/QUESTION -->
+
+        
+        
 <h2 id="questions">Questions</h2>
-<p><strong>How are tokens parsed?</strong></p>
-<p>Hyphenation of tokens at end of line were corrected. Then OpenNLP was used to tokenize and perform part of speech (POS) tagging. No additional data cleaning or OCR correction was performed. Additional information on</p>
-<p><strong>Can I use the page sequence as an unique identifier?</strong></p>
+<h3 id="token-parse">How are tokens parsed?</h3>
+<p>Hyphenation of tokens at end of line were corrected using custom code. <a href="http://opennlp.apache.org/">Apache OpenNLP</a> was used for sentence segmentation, tokenization, and part of speech (POS) tagging. No additional data cleaning or OCR corrections were performed.</p>
+<p>OpenNLP uses <a href="http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html">the Penn Treebank POS tags</a>.</p>
+<h3 id="page-id">Can I use the page sequence as an unique identifier?</h3>
 <p>The <em>seq</em> value is always sequential from the start. This means that the pages of a volume each have a unique sequence number, but this is specific to the current version of the full text. In theory, updates to the OCR that add or remove pages will change the sequence. The practical likelihood of sequential changes is low, but uses of the page as an id should be cautious.</p>
 <p>A future release of this data will include persistent page identifiers that remain unchanged when there are sequential changes.</p>
-<p><strong>Where’s the metadata? Who wrote the book, when is it from, etc.?</strong></p>
-<p>This download includes features extracted from the full-text pages of volumes in the HTRC collection. HTRC offers a metadata API where you can find more information about the volumes, using the volume <em>id</em> field. {LINK to details about API.}</p>
-<p>[If we can provide <em>some</em> kind of bulk metadata for each tar.gz of volumes, that would be great. Even like a .csv of author, title, date, language, etc. would be helpful. Otherwise people aren’t going to do anything with the data, realistically. If I have to hammer on an API to identify which volumes in a set are relevant to me, I’m usually going to put that off to another day. Ted]</p>
-<p><strong>What do I do with beginning- or end-of-line characters?</strong></p>
-<p>The characters at the start of a line can be used to differentiate text from paratext at a page level: for instance, index lines tend to begin with capitalized letters and an index page often includes repeated initial characters with a set of numbers at the end of lines.</p>
-<p>The characters at the end of a line can be used to differentiate text from paratext: lines in a table of contents, for instance, tend to end with a number.</p>
-<p><strong>What is the difference between the header, body, and footer sections?</strong></p>
+<h3 id="metadata">Where’s the metadata? Who wrote the book, when is it from, etc.?</h3>
+<p>This download only includes <em>features extracted from the full-text pages of volumes</em> in the HTRC collection. For metadata information, such as details about the author, such as author, title, date, and subject classifications, HT and HTRC offer [a metadata API] where you can find more information about the volumes, using the volume <em>id</em> field.</p>
+<p>What do I do with beginning- or end-of-line characters? {#eol}</p>
+<p>The characters at the start and end of a line can be used to differentiate text from <a href="http://en.wikipedia.org/wiki/Paratext">paratext</a> at a page level. For instance, index lines tend to begin with capitalized letters and end with numbers. Likewise, lines in a table of contents can be identified through arabic or roman numerals at the start of a line.</p>
+<h3 id="header-q">What is the difference between the header, body, and footer sections?</h3>
 <p>Because repeated headers and footers can distort word counts in a document, but also help identify document parts, we attempt to identify repeated lines at the top or bottom of a page and provide separate token counts for those forms of paratext. The “header” and “footer” sections will also include tokens that are page numbers, catchwords, or other short lines at the very top or bottom of a page. Users can of course ignore these divisions by aggregating the token counts for header, body, and footer sections.</p>
+<p>current implementation if a page has &lt; 3 lines, assume no HEADER or FOOTER for &gt;= 3 lines, assume that there might be a header and a footer… and in that case, the body would be all the lines except the first and last compute numCharsBody = max(numCharsPerLine) = max number of characters per line for the body where characters are non-whitespace and non-punctuation compute numCharsHeader and numCharsFooter as the number of characters where characters are non-whitespace and non-punctuation if the numCharsHeader &lt; numCharsBody * 0.5 then establish the header as the HEADER if numCharsFooter &lt; numCharsBody * 0.05, then establish the footer as the FOOTER</p>
+
+        
 
 	    </div> <!-- End documentation col-->
     </div> <!-- End documentation row-->
