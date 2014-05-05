@@ -34,11 +34,12 @@
         <!--START INTRO-->
         
 <h1 id="page-level-features-from-the-htrc">Page-Level Features From the HTRC</h1>
-<p>We feel that a great deal of useful research can be done with pre-calculated features. We are providing all features in json format. The primary precalculated feature that we will be providing is the token (unigram) count, on a per-page basis. In other words, each page will be represented as a collection of pairs where a token is paired with its count on the page. In reality this becomes slightly more complicated because we are also performing part of speech (POS) tagging, and so it is really tokens-as-specific-POS that are being computed.</p>
-<p>There is a fair amount of consensus among users that it is important to provide token information at the page level — since it otherwise becomes impossible to separate text from paratext (e.g. thirty pages of publishers’ ads at the back of a book). We have decided to break each page into a collection of three parts: header, body, and footer.</p>
+<p>We feel that a great deal of useful research can be done with pre-calculated features. We are providing all features in json format. The primary pre-calculated feature that we will be providing is the token (unigram) count, on a per-page basis. In other words, each page will be represented as a collection of pairs where a token is paired with its count on the page. In reality this becomes slightly more complicated because we are also performing part of speech (POS) tagging, and so it is really tokens-as-specific-POS that are being computed.</p>
+<p>There is a fair amount of consensus among users that it is important to provide token information at the page level — since it otherwise becomes impossible to separate text from paratext (e.g. thirty pages of publishers’ ads at the back of a book). We have also decided to break each page into a collection of three parts: header, body, and footer.</p>
 <p>We use an open-source tool (OpenNLP) for tokenizing text and for tagging parts of speech. This will make it possible for users to reconstruct our process, so they can compare data from HathiTrust volumes to volumes they may have locally. We also rejoin words that are broken across a hyphen at the end of a line.</p>
 <p>As part of our page representation, we also include two special features: the number of lines on each page, and the number of lines with text. Finally, we will provide a per-page count of characters that start and end lines on each page (this is a case-sensitive list, created before rejoining words broken at a hyphen). This information can illuminate genre and volume structure: for instance, it helps distinguish poetry from prose, and the text from the body that forms an index.</p>
 <p>Review <a href="#sample">sample data</a> or jump straight to the <a href="#downloads">downloads</a>.</p>
+<h2 id="documentation">Documentation</h2>
         
         </div> <!-- END intro col -->
     </div>
@@ -48,94 +49,132 @@
 	    <pre><code>
 
 {
-  "id": "39015000225717",
-  "pageCount": 88,
-  "pages": [
-    {
-      "pageNumber": 1,
-      "headerStats": {
-        "tokenCount": 0,
-        "lineCount": 0,
-        "emptyLineCount": 0,
-        "sentenceCount": 0,
-        "tokens": {},
-        "beginLineChars": {},
-        "endLineChars": {}
-      },
-      "bodyStats": {
-        <span class="blah">&nbsp;</span>"tokenCount": 4,
-        "lineCount": 4,
-        "emptyLineCount": 0,
-        "sentenceCount": 1,
-        "tokens": {
-          "GRAD": {
-            "NNP": 1
-          },
-          "1903": {
-            "CD": 1
-          }
-        },
-        "beginLineChars": {
-          "1": 1,
-          "8": 1
-        },
-        "endLineChars": {
-          "3": 1,
-          "8": 1
-        }
-      },
-      "footerStats": {
-        "tokenCount": 0,
-        "lineCount": 0,
-        "emptyLineCount": 0,
-        "sentenceCount": 0,
-        "tokens": {},
-        "beginLineChars": {},
-        "endLineChars": {}
-      },
-      "tokenCount": 4,
-      "lineCount": 4,
-      "emptyLineCount": 0,
-      "sentenceCount": 1
-    },
-…
-{
-      "pageNumber": 16,
-      "tokenCount": 180,
-	…
-      "lineCount": 25,
-      "emptyLineCount": 0,
-      "sentenceCount": 7
-    },
+   "id":"loc.ark:/13960/t1fj34w02",
+   "metadata":{
+      "schemaVersion":"1.0",
+      "title":"Shakespeare's Romeo and Juliet,",
+      "genre":"not fiction, Tragedies",
+      "pubDate":1920,
+      "htBibUrl":"http://catalog.hathitrust.org/api/volumes/full/htid/loc.ark:/13960/t1fj34w02",
+      "dateCreated":"2014-05-01T09:42",
+      "handleUrl":"http://hdl.handle.net/2027/loc.ark:/13960/t1fj34w02",
+      "oclc":"",
+      "language":"eng",
+      "imprint":"Chicago, Scott Foresman and company, [c1920]"
+   },
+   "features":{
+      "schemaVersion":"1.0",
+      "dateCreated":"2014-05-01T02:15",
+      "pageCount":230,
+      "pages":[
+         {
+            "seq":15,
+            "tokenCount":212,
+            "lineCount":38,
+            "emptyLineCount":10,
+            "sentenceCount":7,
+            "header":{
+               "tokenCount":1,
+               "lineCount":1,
+               "emptyLineCount":0,
+               "sentenceCount":1,
+               "tokens":{
+                  "INTRODUCTION":{
+                     "NN":1
+                  }
+               },
+               "beginLineChars":{
+                  "I":1
+               },
+               "endLineChars":{
+                  "N":1
+               }
+            },
+            "body":{
+               "tokenCount":211,
+               "lineCount":37,
+               "emptyLineCount":10,
+               "sentenceCount":6,
+               "tokens":{
+                  "priests":{
+                     "NNS":1
+                  },
+                  "development":{
+                     "NN":1
+                  },
+                  "extraordinary":{
+                     "JJ":1
+                  },
+                  …
+                  "growth":{
+                     "NN":1
+                  }
+               },
+               "beginLineChars":{
+                  "f":2, "d":2, "b":2, …,"S":1
+               },
+               "endLineChars":{
+                  "f":1, "g":2, "d":2, …, "r":1
+               }
+            },
+            "footer":{
+               "tokenCount":0,
+               "lineCount":0,
+               "emptyLineCount":0,
+               "sentenceCount":0,
+               "tokens":{ },
+               "beginLineChars":{ },
+               "endLineChars":{ }
+            }
+         }
+      ]
+   }
+}
+    
 	    </code></pre>
 	</div> <!-- End example JSON column -->
 	<div class="col-md-6">
     <!-- START DOCUMENTATION -->
     
     
-<h2 id="documentation">Documentation</h2>
 <h3 id="volume">Volume</h3>
 <p>The volume represents the current work (e.g. book) as represented in the HathiTrust index.</p>
 <p><strong>id</strong>: A unique identifier for the current volume. This is the same identifier used in the HathiTrust and HathiTrust Research Center corpora.</p>
+<h3 id="metadata">Metadata</h3>
+<p>The provided metadata is extracted from…</p>
+<p><strong>schemaVersion</strong>: A version identifier for the format and structure of the metadata (HTRC generated).</p>
+<p><strong>dateCreated</strong>: The time the batch of metadata was processed and recorded (HTRC generated).</p>
+<p><strong>title</strong>: Title of the given volume.</p>
+<p><strong>imprint</strong>: The publication place, publisher, and publication date of the given volume (260 a from Hathitrust MARC record, 260 b and c from Hathifiles).</p>
+<p><strong>language</strong>: The primary language of the given volume (MARC control field 008 from Hathifiles).</p>
+<p><strong>genre</strong>: The given genre(s) decoded from MARC data fields 655abvxy, 045abcdef, 336ab, leader, and control field 008.</p>
+<p><strong>pubDate</strong>: The publication year (integer) as determined by HathiTrust's rights-determination algorithm (Hathifiles).</p>
+<p><strong>oclc</strong>: The array of OCLC number(s) (Hathifiles).</p>
+<p><strong>handleUrl</strong>: The persistent identifier for the given volume (derived from the volumeID).</p>
+<p><strong>htBibLink</strong>: The HathiTrust Bibliographic API call for the volume (derived from the volumeID).</p>
+<h3 id="features">Features</h3>
+<p>The features extracted from the content of the volume.</p>
+<p><strong>Version</strong>: A version identifier for the format and structure of the feature data (HTRC generated).</p>
+<p><strong>dateCreated</strong>: The time the batch of metadata was processed and recorded (HTRC generated).</p>
 <p><strong>pageCount</strong>: The number of pages in the volume.</p>
 <p><strong>pages</strong>: An array of JSON objects, each representing a page of the volume.</p>
 <h3 id="page">Page</h3>
 <p>Pages are contained within volumes, they have a sequence number, and information about their header, body, and footer.</p>
 <h4 id="page-level-information">Page-level information</h4>
 <p><strong>seq</strong>: The sequence number. <a href="#page-id">See notes on ID usage</a>.</p>
-<p><strong>lineCount</strong>: Number of non-empty lines in the page.</p>
-<p><strong>emptyLineCount</strong>: Number of empty lines in the page.</p>
-<p><strong>sentenceCount</strong>: Number of sentences identified in the page using OpenNLP. <a href="#sentence-parse">Details on parsing</a>.</p>
+<p><strong>tokenCount</strong>: The total number of tokens in the page.</p>
+<p><strong>lineCount</strong>: The total number of non-empty lines in the page.</p>
+<p><strong>emptyLineCount</strong>: The total number of empty lines in the page.</p>
+<p><strong>sentenceCount</strong>: Total number of sentences identified in the page using OpenNLP. <a href="#sentence-parse">Details on parsing</a>.</p>
 <h4 id="header-body-and-footer-information">Header, Body, and Footer information</h4>
 <p>The fields for <em>headerStats</em>, <em>bodyStats</em>, and <em>footerStats</em> are the same, but apply to different parts of the page. <a href="#header-q">Read about the differences between the sections</a>.</p>
 <p><strong>tokenCount</strong>: The total number of tokens in this page section.</p>
 <p><strong>lineCount</strong>: The number of lines containing characters of any kind in this page section. This represents the layout of the page, for sentence counts, see the <em>sentenceCount</em> field.</p>
 <p><strong>emptyLineCount</strong>: The number of lines without text in this page section.</p>
 <p><strong>sentenceCount</strong>: The number of sentences found in the text in this page section, parsed using OpenNLP.</p>
-<p><strong>tokens</strong>: A list of all tokens in this page section characterized by part of speech using OpenNLP. Tokens are case-sensitive. There will be separate counts, for instance, for “rose” (noun) and “rose” (verb), while a capitalized “Rose” is shown as a separate token. Words separated by a hyphen across a line break are rejoined. No other data cleaning or OCR correction was performed. <a href="#token-parse">Details on POS parsing and types of tags used</a>.</p>
+<p><strong>tokens</strong>: An unordered list of all tokens in this page section characterized by part of speech using OpenNLP. Tokens are case-sensitive. There will be separate counts, for instance, for “rose” (noun) and “rose” (verb), while a capitalized “Rose” is shown as a separate token. Words separated by a hyphen across a line break are rejoined. No other data cleaning or OCR correction was performed. <a href="#token-parse">Details on POS parsing and types of tags used</a>.</p>
 <p><strong>beginLineChars</strong>: Count of the initial character of each line in this page section (ignoring whitespace).</p>
 <p><strong>endLineChars</strong>: Count of the last character on each line in this page section (ignoring whitespace).</p>
-
 
     
 	</div> <!-- End short documentation -->
@@ -144,7 +183,7 @@
     <div class="row">
 	    <div class="col-md-8">
 		    <h2 id="downloads">Download Links</h2>
-		    <p class="text-warning">By downloading the archives below, you agree to our <a>Terms of Use</a>.<strong>(placeholder)</strong></p>
+		    <p class="text-warning">Thi feature download is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
 		    <p><a><span class="glyphicon glyphicon-compressed"></span> file.bz2</a>
 	    </div>
 	    <div class="col-md-4">
@@ -175,7 +214,7 @@
 <p>The <em>seq</em> value is always sequential from the start. This means that the pages of a volume each have a unique sequence number, but this is specific to the current version of the full text. In theory, updates to the OCR that add or remove pages will change the sequence. The practical likelihood of sequential changes is low, but uses of the page as an id should be cautious.</p>
 <p>A future release of this data will include persistent page identifiers that remain unchanged when there are sequential changes.</p>
 <h3 id="metadata">Where’s the metadata? Who wrote the book, when is it from, etc.?</h3>
-<p>This download only includes <em>features extracted from the full-text pages of volumes</em> in the HTRC collection. For metadata information, such as details about the author, such as author, title, date, and subject classifications, HT and HTRC offer [a metadata API] where you can find more information about the volumes, using the volume <em>id</em> field.</p>
+<p>This download only includes <em>features extracted from the full-text pages of volumes</em> in the HTRC collection. For additional metadata information, i.e. author, subject classifications, etc. HT and HTRC offer [a metadata API] where you can find more information about the volumes, using the volume <em>id</em> field.</p>
 <h3 id="eol">What do I do with beginning- or end-of-line characters?</h3>
 <p>The characters at the start and end of a line can be used to differentiate text from <a href="http://en.wikipedia.org/wiki/Paratext">paratext</a> at a page level. For instance, index lines tend to begin with capitalized letters and end with numbers. Likewise, lines in a table of contents can be identified through arabic or roman numerals at the start of a line.</p>
 <h3 id="header-q">What is the difference between the header, body, and footer sections?</h3>
@@ -198,12 +237,18 @@
     <div class="row">
 	    <div class="col-md-4">
 		    <h4>Contact Us</h4>
-		    <p>Contact Info</p>
+		    <p id='contact'>Need JavaScript to show</p>
+            
+<script language="text/javascript">
+// Add email to page dynamically
+
+</script>
+
+            
 	    </div>
 	    <div class="col-md-4">
 		    <h4>Tools</h4>
-		    <p>TBA<p>
-		    <p class="text-muted">If you've built tools or scripts for processing our data, <a>let us know</a>!</p>
+		    <p class="text-muted">If you've built tools or scripts for processing our data, let us know and we'll feature them here!</p>
 	    </div>
 	    <div class="col-md-4">
 		    <h4>Projects</h4>
@@ -218,6 +263,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script>$(span:contains("\"tokenCount\"")).css("text-size", 30)</script>
+    <script>
+    $(document).ready(function(){
+        var a = "@";
+        $("#contact").text("htrc-support-l"+a+"list.indiana.edu");
+    });
+    </script>
   </div></body>
 </html>
