@@ -241,6 +241,8 @@
 <h1 id="page-level-features-from-the-htrc">Page-Level Features From the HTRC</h1>
 <p>We feel that a great deal of useful research can be done with pre-calculated features. We are providing all features in json format. The primary precalculated feature that we will be providing is the token (unigram) count, on a per-page basis. In other words, each page will be represented as a collection of pairs where a token is paired with its count on the page. In reality this becomes slightly more complicated because we are also performing part of speech (POS) tagging, and so it is really tokens-as-specific-POS that are being computed.</p>
 <p>There is a fair amount of consensus among users that it is important to provide token information at the page level — since it otherwise becomes impossible to separate text from paratext (e.g. thirty pages of publishers’ ads at the back of a book). We have also decided to break each page into a collection of three parts: header, body, and footer.</p>
+<!--REMOVED: We use an open-source tool (OpenNLP) for tokenizing text and for tagging parts of speech. This will make it possible for users to reconstruct our process, so they can compare data from HathiTrust volumes to volumes they may have locally. We also rejoin words that are broken across a hyphen at the end of a line.-->
+
 <p>As part of our page representation, we also include two special features: the number of lines on each page, and the number of lines with text. Finally, we provide a per-page count of characters that start and end lines on each page. This information can illuminate genre and volume structure: for instance, it helps distinguish poetry from prose, or body text from an index.</p>
 <p>Review <a href="#sample">sample data</a> or jump straight to the <a href="#downloads">downloads</a>.</p>
 
@@ -358,7 +360,7 @@
 <p><strong>emptyLineCount</strong>: The total number of empty lines in the page.</p>
 <p><strong>sentenceCount</strong>: Total number of sentences identified in the page using OpenNLP. <a href="#sentence-parse">Details on parsing</a>.</p>
 <h4 id="header-body-and-footer-information">Header, Body, and Footer information</h4>
-<p>The fields for <em>headerStats</em>, <em>bodyStats</em>, and <em>footerStats</em> are the same, but apply to different parts of the page. <a href="#header-q">Read about the differences between the sections</a>.</p>
+<p>The fields for <em>header</em>, <em>body</em>, and <em>footer</em> are the same, but apply to different parts of the page. <a href="#header-q">Read about the differences between the sections</a>.</p>
 <p><strong>tokenCount</strong>: The total number of tokens in this page section.</p>
 <p><strong>lineCount</strong>: The number of lines containing characters of any kind in this page section. This represents the layout of the page, for sentence counts, see the <em>sentenceCount</em> field.</p>
 <p><strong>emptyLineCount</strong>: The number of lines without text in this page section.</p>
@@ -399,6 +401,7 @@
 
         
         
+
 <h2 id="questions">Questions</h2>
 <h3 id="token-parse">How are tokens parsed?</h3>
 <p>Hyphenation of tokens at end of line was corrected using custom code. <a href="http://opennlp.apache.org/">Apache OpenNLP</a> was used for sentence segmentation, tokenization, and part of speech (POS) tagging. No additional data cleaning or OCR corrections was performed.</p>
@@ -413,7 +416,7 @@
 <li>imprint: 260 a from Hathitrust MARC record, 260b and 260c from Hathifiles.</li>
 <li>language: MARC control field 008 from Hathifiles.</li>
 <li>genre: MARC data fields 655abvxy, 045abcdef, 336ab, leader, and control field 008.</li>
-<li>pubDate: extracted from Hathifiles. <a href="http://www.hathitrust.org/bib_rights_determination">Details on HathiTrust's rights-determination.</a>.</li>
+<li>pubDate: extracted from Hathifiles. See also: <a href="http://www.hathitrust.org/bib_rights_determination">details on HathiTrust's rights-determination</a>.</li>
 <li>oclc: extracted from HathiFiles.</li>
 </ul>
 <p>Additionally, schemaVersion and dateCreated are specific to this feature dataset.</p>
@@ -423,6 +426,7 @@
 <p>Because repeated headers and footers can distort word counts in a document, but also help identify document parts, we attempt to identify repeated lines at the top or bottom of a page and provide separate token counts for those forms of paratext. The “header” and “footer” sections will also include tokens that are page numbers, catchwords, or other short lines at the very top or bottom of a page. Users can of course ignore these divisions by aggregating the token counts for header, body, and footer sections.</p>
 <p>The current implementation uses a variety of heuristics to identify headers and footers, which can be seen in our <a href="http://svn.code.sf.net/p/htrc/code/HTRC-Data-FeatureExtractor/trunk/src/main/java/edu/illinois/i3/htrc/data/featurextract/NaivePageStructureParser.java">code base</a>. Note that we are considering methods for improving header/footer parsing, and this code is subject to change.</p>
 
+        
         
 
 	    </div> <!-- End documentation col-->
