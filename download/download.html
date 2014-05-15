@@ -239,11 +239,15 @@
         <!--START INTRO-->
         
 <h1 id="page-level-features-from-the-htrc">Page-Level Features From the HTRC</h1>
-<p>We feel that a great deal of useful research can be done with pre-calculated features. We are providing all features in json format. The primary precalculated feature that we will be providing is the token (unigram) count, on a per-page basis. In other words, each page will be represented as a collection of pairs where a token is paired with its count on the page. In reality this becomes slightly more complicated because we are also performing part of speech (POS) tagging, and so it is really tokens-as-specific-POS that are being computed.</p>
-<p>There is a fair amount of consensus among users that it is important to provide token information at the page level — since it otherwise becomes impossible to separate text from paratext (e.g. thirty pages of publishers’ ads at the back of a book). We have also decided to break each page into a collection of three parts: header, body, and footer.</p>
-<!--REMOVED: We use an open-source tool (OpenNLP) for tokenizing text and for tagging parts of speech. This will make it possible for users to reconstruct our process, so they can compare data from HathiTrust volumes to volumes they may have locally. We also rejoin words that are broken across a hyphen at the end of a line.-->
 
-<p>As part of our page representation, we also include two special features: the number of lines on each page, and the number of lines with text. Finally, we provide a per-page count of characters that start and end lines on each page. This information can illuminate genre and volume structure: for instance, it helps distinguish poetry from prose, or body text from an index.</p>
+
+
+<p class="text-warning">Note that this is an <strong>alpha</strong> data release. Please send feedback to <span class="contact">(Need javascript to show)</span>.</p>
+
+
+<p>A great deal of useful research can be performed with pre-extracted features. For this reason, we've prepared a data export of features in an out-of-copyright English collection of digitized text from the Hathitrust.</p>
+<p><em>Features</em> are notable or informative characteristics of the text. We have processed a number of useful features, including part-of-speech tagged token counts, header and footer identification, and various line-level information, all provided <em>per-page</em>. Providing token information at the page level makes it possible to separate text from paratext. (An example of the latter may be: thirty pages of publishers’ ads at the back of a book). We have also decided to break each page into a collection of three parts: header, body, and footer. The specific features that we extract from the text are described in more detail below.</p>
+<p>The primary precalculated feature that we will be providing is the token (unigram) count, on a per-page basis. Term counts are specific to the part-of-speech usage for that term, so that a term used as both a noun and a verb, for example, with have count provided for both approach. We also include line information, such as the number of lines with text on each page, and a count of characters that start and end lines on each page. This information can illuminate genre and volume structure: for instance, it helps distinguish poetry from prose, or body text from an index.</p>
 <p>Review <a href="#sample">sample data</a> or jump straight to the <a href="#downloads">downloads</a>.</p>
 
         
@@ -330,6 +334,7 @@
     
     
 <h2 id="documentation">Documentation</h2>
+<p>The extracted features data is provided in JSON form.</p>
 <h3 id="volume">Volume</h3>
 <p>The volume represents the current work (e.g. book) as represented in the HathiTrust index.</p>
 <p><strong>id</strong>: A unique identifier for the current volume. This is the same identifier used in the HathiTrust and HathiTrust Research Center corpora.</p>
@@ -377,16 +382,20 @@
 	    <div class="span8">
 		    <h2 id="downloads">Download Links</h2>
 		    <p class="text-warning">This feature dataset is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
-		    <p><a><span class="glyphicon glyphicon-compressed"></span> file.bz2</a>
+            <h3>Download</h3>
+		    <p>Below we provide the extracted feature data for download, in the form of chronologically sequential bundles consisting of page-level features and metadata. While we attempted to keep the bundles of similar size, the file size varies because we were careful to not split years between bundles.</p>
+            <p><a><span class="glyphicon glyphicon-compressed"></span> file.bz2</a>
+            <h3>RSync</h3>
+            <p>It is also possible to collect the data with RSync...</p>
 	    </div>
 	    <div class="span4">
 		    <h2>About the Data</h2>
 		    <p>The data provided here represents non-consumptive features of pages from the HathiTrust Research Center public domain dataset.</p>
 		    <table class="table">
 			    <tr>
-				    <td># of pages</td><td>67 932 813</td>
+				    <td># of pages</td><td>67932813</td>
 			   </tr><tr>
-				    <td># of volumes</td><td>250 178</td>
+				    <td># of volumes</td><td>250178</td>
 			   </tr><tr>
 				    <td>Years</td><td>1431-2010</td>
 			   </tr><tr>
@@ -435,7 +444,7 @@
     <div class="row-fluid">
 	    <div class="span4">
 		    <h4>Contact Us</h4>
-		    <p id='contact'>Need JavaScript to show</p>
+		    <p class='contact'>Need JavaScript to show</p>
             
 <script language="text/javascript">
 // Add email to page dynamically
@@ -463,7 +472,7 @@
     <script>
     $(document).ready(function(){
         var a = "@";
-        $("#contact").text("htrc-support-l"+a+"list.indiana.edu");
+        $(".contact").text("htrc-support-l"+a+"list.indiana.edu");
     });
     </script>
 
