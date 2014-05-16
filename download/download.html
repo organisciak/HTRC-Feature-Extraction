@@ -245,9 +245,9 @@
 <p class="text-info">Note that this is an <strong>alpha</strong> data release. Please send feedback to <span class="contact">(Need javascript to show)</span>.</p>
 
 
-<p>A great deal of useful research can be performed non-consumptively with pre-extracted features. For this reason, we've prepared a data export of features in an out-of-copyright English collection of digitized text from the Hathitrust.</p>
+<p>A great deal of fruitful research can be performed using non-consumptive pre-extracted features. For this reason, HTRC has put together a select set of page-level features extracted from the HathiTrust's non-Google-digitized public domain volumes. The source texts for this set of feature files are primarily in English.</p>
 <p><em>Features</em> are notable or informative characteristics of the text. We have processed a number of useful features, including part-of-speech tagged token counts, header and footer identification, and various line-level information. This is all provided <em>per-page</em>. Providing token information at the page level makes it possible to separate text from paratext. (An example of the latter may be: thirty pages of publishers’ ads at the back of a book). We have also decided to break each page into a collection of three parts: header, body, and footer. The specific features that we extract from the text are described in more detail below.</p>
-<p>The primary precalculated feature that we are providing is the token (unigram) count, on a per-page basis. Term counts are specific to the part-of-speech usage for that term, so that a term used as both a noun and a verb, for example, with have separate counts provided for both these modalities of its use. We also include line information, such as the number of lines with text on each page, and a count of characters that start and end lines on each page. This information can illuminate genre and volume structure: for instance, it helps distinguish poetry from prose, or body text from an index.</p>
+<p>The primary pre-calculated feature that we are providing is the token (unigram) count, on a per-page basis. Term counts are specific to the part-of-speech usage for that term, so that a term used as both a noun and a verb, for example, with have a separate count provided for each of these two modalities of its use. We also include line information, such as the number of lines with text on each page, and a count of characters that start and end lines on each page. This information can illuminate genre and volume structure: for instance, it helps distinguish poetry from prose, or body text from an index.</p>
 <p>The present release is an alpha release, and we would love to hear about how you use it, or what else you would like to see!</p>
 <p>Review <a href="#sample">sample data</a> or jump straight to the <a href="#downloads">downloads</a>.</p>
 
@@ -263,8 +263,7 @@
    "id":"loc.ark:/13960/t1fj34w02",
    "metadata":{
       "schemaVersion":"1.0",
-      "title":"Shakespeare\'s Romeo and Juliet,",
-      "genre":"not fiction, Tragedies",
+      "title":"Shakespeare's Romeo and Juliet,",
       "pubDate":1920,
       "htBibUrl":"http://catalog.hathitrust.org/api/volumes/full/htid/loc.ark:/13960/t1fj34w02",
       "dateCreated":"2014-05-01T09:42",
@@ -304,6 +303,13 @@
                   "priests":{ "NNS":1 },
                   "development":{ "NN":1 },
                   "extraordinary":{ "JJ":1 },
+                  "striking":{ "JJ":1 },
+                  "ceremonial":{ "NN":1 },
+                  "which":{ "WDT":3 },
+                  "sprang":{ "VBD":1 },
+                  ".":{ ".":7 },
+                  ",":{ ",":10 },
+                  "1600":{ "CD":1 },
                   …,
                   "growth":{ "NN":1 }
                },
@@ -344,7 +350,8 @@
 <p><strong>schemaVersion</strong>: A version identifier for the format and structure of this metadata object. <em>metadata.schemaVersion</em> is separate from <em>features.schemaVersion</em> below.</p>
 <p><strong>dateCreated</strong>: The time this metadata object was processed. <em>metadata.dateCreated</em> is not necessarily the same as the <em>features.dataCreated</em> below.</p>
 <p><strong>title</strong>: Title of the given volume.</p>
-<p><strong>pubDate</strong>: The publication year. <strong>language</strong>: The primary language of the given volume.</p>
+<p><strong>pubDate</strong>: The publication year.</p>
+<p><strong>language</strong>: The primary language of the given volume.</p>
 <p><strong>htBibLink</strong>: The HathiTrust Bibliographic API call for the volume.</p>
 <p><strong>handleUrl</strong>: The persistent identifier for the given volume.</p>
 <p><strong>oclc</strong>: The array of OCLC number(s).</p>
@@ -386,7 +393,7 @@
             <p><a><span class="glyphicon glyphicon-compressed"></span> file.bz2</a>
 
             
-            <h3 id="rsync">Rsync</h3>
+<h3 id="rsync">Rsync</h3>
 <p>The data is also set up to be downloaded with rsync. This has the benefit of allowing you to download feature files individually, and keeping them in sync with our copies.</p>
 <p>To sync all the feature files:</p>
 <pre><code>rsync -v sandbox.htrc.illinois.edu::ngpd-features/*/*.json.bz2 .</code></pre>
@@ -437,7 +444,6 @@
 <ul>
 <li>imprint: 260 a from Hathitrust MARC record, 260b and 260c from Hathifiles.</li>
 <li>language: MARC control field 008 from Hathifiles.</li>
-<li>genre: MARC data fields 655abvxy, 045abcdef, 336ab, leader, and control field 008.</li>
 <li>pubDate: extracted from Hathifiles. See also: <a href="http://www.hathitrust.org/bib_rights_determination">details on HathiTrust's rights-determination</a>.</li>
 <li>oclc: extracted from HathiFiles.</li>
 </ul>
